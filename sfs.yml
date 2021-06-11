@@ -1,0 +1,28 @@
+---
+- name: "Create Linux User"
+  import_playbook: create_linux_user_generic.yml
+  vars:
+    enable_git_output: "{{ external_enable_git_output }}"
+    enable_sfs_output: "{{external_enable_sfs_output}}"
+    enable_user_task: "{{ external_enable_user_task}}"
+
+- name: "Preparing for SFS Upload"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - sfs_default_variables.yml
+  tasks:
+    - name: "Prepare SFS upload base dir."
+      include_role:
+        name: sfs_upload
+      vars:
+        sfs_upload_stage: "prepare"
+        output_dir: "/tmp/gts-ansible/CreateUsers"
+
+    - name: "Upload results"
+      include_role:
+        name: sfs_upload
+      vars:
+        sfs_upload_stage: "upload"
+        output_file_name: "Create_Linux_Users_{{ tower_job_id }}_{{ timestamp }}.zip"

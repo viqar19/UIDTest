@@ -1,0 +1,34 @@
+---
+# Defines the stage of the wrapper to be executed.
+#   "prepare" = prepare temporary folders for data on Tower host;
+#   "upload"  = upload data from Tower to SFS, then if successful -
+#               cleanup temporary folders and data from Tower.
+# Default = "prepare"
+sfs_upload_stage: "prepare"
+
+# Explicitly define if uploaded compressed data should be
+# unpacked by SFS upon upload and stored in SFS vault in original
+# uncompressed state.
+# Default = undefined (upload to SFS will use SFS server generic configuration)
+# unpack_on_sfs: false
+
+# (password|token) Defines an authentication method to use when
+# accessing Tower and SFS APIs via HTTPS
+# Default = "password"
+api_auth_by: "password"
+
+# Other variables
+upload_url: "https://secure-file-service.ocp3.sr1.eu1.sp.ibm.local/files"
+#output_dir: "/tmp/gts-ansible/generic"
+upload_results: true
+merge_results: false
+#output_file_name: "job{{ tower_job_id }}_time{{ timestamp }}.zip"
+upload_url_subfolder: ""
+merge_filenames_regex: "\\.(txt|csv)$"
+merged_file_name: "merged_file_job{{ tower_job_id }}_time{{ timestamp }}.txt"
+merged_file_separator_text: ""
+force_temp_folder_cleanup: true
+# Default set to false. To enable secondary copy set to true.
+secondary_upload_results: false
+# Default set to standard folder on sfs for user view.
+secondary_upload_url_subfolder: "info"
