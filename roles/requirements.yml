@@ -1,0 +1,3 @@
+- name: sfs_upload
+  src: https://github.ibm.com/Continuous-Engineering/ansible_role_sfs_upload.git
+  scm: git
