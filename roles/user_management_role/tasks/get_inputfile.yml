@@ -45,7 +45,7 @@
  - debug:
          msg: "Output of shell commands ------{{ shell_output2 }}"
  - name: Git Checkout file
-   shell: "git checkout Gaurav_test -- {{ var_inputcsvfile }}"
+   shell: "git checkout -b Gaurav_test -- {{ var_inputcsvfile }}"
    args:
        chdir: "{{ var_directory }}"
    register: shell_output3
